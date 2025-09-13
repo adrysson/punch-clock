@@ -1,14 +1,28 @@
 <div>
-    <!-- Botão Livewire para bater ponto -->
-    <button wire:click="punch" class="btn btn-primary">
-        {{ __('Bater ponto') }}
-    </button>
-    <h2 class="mt-4">{{ __('Últimos pontos batidos') }}</h2>
-    <ul class="list-group">
-        @foreach ($timeClocks as $timeClock)
-            <li class="list-group-item">
-                {{ $timeClock->created_at->format('d/m/Y H:i:s') }}
-            </li>
-        @endforeach
-    </ul>
+    @include('partials.time-clock-heading')
+
+    <!-- div com metade do tamanho da tela, centralizada, com flex -->
+    <div class="flex flex-col items-center">
+        <flux:button variant="primary" wire:click="punch">
+            {{ __('Registrar ponto') }}
+        </flux:button>
+        <div>
+            <table class="table-auto w-full mt-4">
+                <thead>
+                    <tr>
+                        <th>{{ __('Data') }}</th>
+                        <th>{{ __('Hora') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($timeClocks as $timeClock)
+                        <tr>
+                            <td>{{ $timeClock->created_at->format('d/m/Y') }}</td>
+                            <td>{{ $timeClock->created_at->format('H:i') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
