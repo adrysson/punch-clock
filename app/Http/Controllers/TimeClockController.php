@@ -11,7 +11,6 @@ class TimeClockController extends Controller
     {
         $timeClock = TimeClock::create([
             'user_id' => $request->user()->id,
-            'punch_time' => now(),
         ]);
 
         return response()->json($timeClock, 201);
