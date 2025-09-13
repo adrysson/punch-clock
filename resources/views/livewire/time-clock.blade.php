@@ -1,7 +1,6 @@
 <div>
     @include('partials.time-clock-heading')
 
-    <!-- div com metade do tamanho da tela, centralizada, com flex -->
     <div class="flex flex-col items-center">
         <flux:button variant="primary" wire:click="punch">
             {{ __('Registrar ponto') }}
