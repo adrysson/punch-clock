@@ -1,9 +1,4 @@
-<x-layouts.app :title="__('Funcionários')">
-    <div class="relative mb-6 w-full">
-        <flux:heading size="xl" level="1">{{ __('Funcionários') }}</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{ __('Lista de funcionários') }}</flux:subheading>
-        <flux:separator variant="subtle" />
-    </div>
+<x-employees.layout :heading="__('Lista')" :subheading="__('Lista de funcionários cadastrados')">
 
     <div class="flex flex-col items-center">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -34,4 +29,4 @@
             {{ $employees->links() }}
         </div>
     </div>
-</x-layouts.app>
+</x-employees.layout>
