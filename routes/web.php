@@ -24,8 +24,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::group(['prefix' => 'employees', 'as' => 'employees.'], function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('index');
-        // Route::get('/create', [\App\Http\Controllers\EmployeeController::class, 'create'])->name('create');
-        // Route::post('/', [\App\Http\Controllers\EmployeeController::class, 'store'])->name('store');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('create');
+        Route::post('/', [EmployeeController::class, 'store'])->name('store');
         // Route::get('/{employee}/edit', [\App\Http\Controllers\EmployeeController::class, 'edit'])->name('edit');
         // Route::put('/{employee}', [\App\Http\Controllers\EmployeeController::class, 'update'])->name('update');
         // Route::delete('/{employee}', [\App\Http\Controllers\EmployeeController::class, 'destroy'])->name('destroy');

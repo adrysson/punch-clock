@@ -23,7 +23,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.create');
     }
 
     /**
@@ -31,7 +31,20 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'string', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+        ]);
+
+        $validated['password'] = \Illuminate\Support\Facades\Hash::make($validated['password']);
+        $validated['profile_id'] = \App\Domain\Enum\Profile::EMPLOYEE->value;
+
+        $user = \App\Models\User::create($validated);
+
+        event(new \Illuminate\Auth\Events\Registered($user));
+
+        return redirect()->route('employees.index')->with('status', __('Funcionário cadastrado com sucesso!'));
     }
 
     /**
