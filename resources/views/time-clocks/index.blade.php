@@ -66,30 +66,27 @@
                                 {{ $timeClock->id }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $timeClock->user->name }}
+                                {{ $timeClock->employee_name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $timeClock->user->role->name }}
+                                {{ $timeClock->employee_role_name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $timeClock->user->birth_date->age }}
+                                {{ \Carbon\Carbon::parse($timeClock->employee_bith_date)->age }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $timeClock->user->manager?->name ?? '-' }}
+                                {{ $timeClock->manager_name ?? '-' }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $timeClock->created_at->format('d/m/Y') }}
+                                 {{ \Carbon\Carbon::parse($timeClock->clock_in_time)->format('d/m/Y') }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $timeClock->created_at->format('H:i') }}
+                                {{ \Carbon\Carbon::parse($timeClock->clock_in_time)->format('H:i:s') }}
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="mt-4">
-                {{ $timeClocks->links() }}
-            </div>
         </div>
     </div>
 </x-time-clocks.layout>
