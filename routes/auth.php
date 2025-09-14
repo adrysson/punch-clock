@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -15,11 +14,6 @@ Route::middleware('guest')->group(function () {
     Volt::route('reset-password/{token}', 'auth.reset-password')
         ->name('password.reset');
 
-});
-
-Route::middleware([AdminMiddleware::class])->group(function () {
-    Volt::route('register', 'auth.register')
-        ->name('admin-register');
 });
 
 Route::middleware('auth')->group(function () {
