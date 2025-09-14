@@ -11,6 +11,9 @@
                         {{ __('E-mail') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        {{ __('Admin') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         {{ __('Ações') }}
                     </th>
                 </tr>
@@ -23,6 +26,9 @@
                         </td>
                         <td class="px-6 py-4">
                             {{ $employee->email }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $employee->admin?->name ?? '-' }}
                         </td>
                         <td class="px-6 py-4 flex">
                             <flux:button icon="eye" class="w-full" href="{{ route('employees.show', $employee->id) }}">

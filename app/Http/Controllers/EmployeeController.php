@@ -40,7 +40,7 @@ class EmployeeController extends Controller
         $validated['password'] = \Illuminate\Support\Facades\Hash::make($validated['password']);
         $validated['profile_id'] = \App\Domain\Enum\Profile::EMPLOYEE->value;
 
-        $user = \App\Models\User::create($validated);
+        $user = auth()->user()->employees()->create($validated);
 
         event(new \Illuminate\Auth\Events\Registered($user));
 

@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(TimeClock::class);
     }
+
+    public function employees()
+    {
+        return $this->hasMany(self::class, 'admin_id');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(self::class, 'admin_id');
+    }
 }

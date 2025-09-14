@@ -39,6 +39,9 @@
                         {{ __('Usuário') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        {{ __('Admin') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         {{ __('Data') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -53,6 +56,9 @@
                             <a class="text-blue-600" href="{{ route('employees.show', $timeClock->user->id) }}">
                                 {{ $timeClock->user->name }}
                             </a>
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $timeClock->user->admin?->name ?? '-' }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $timeClock->created_at->format('d/m/Y') }}
