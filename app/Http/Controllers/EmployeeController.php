@@ -50,30 +50,24 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $employee)
     {
-        $employee = User::findOrFail($id);
-
         return view('employees.show', compact('employee'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $employee)
     {
-        $employee = User::findOrFail($id);
-
         return view('employees.edit', compact('employee'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $employee)
     {
-        $employee = User::findOrFail($id);
-
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,'.$employee->id],
@@ -94,10 +88,8 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $employee)
     {
-        $employee = User::findOrFail($id);
-
         $employee->delete();
 
         return redirect()->route('employees.index')->with('status', __('Funcionário deletado com sucesso!'));
