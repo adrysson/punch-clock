@@ -42,7 +42,7 @@
     :placeholder="__('000.000.000-00')"
     mask="000.000.000-00"
     maxlength="14"
-    :value="$employee?->name ?? ''"
+    :value="$employee?->document ?? ''"
 />
 
 <!-- Birth Date -->
@@ -53,7 +53,7 @@
     required
     autocomplete="birth_date"
     :placeholder="__('Data de nascimento')"
-    :value="$employee?->birth_date ?? ''"
+    :value="$employee?->birth_date->format('Y-m-d') ?? ''"
 />
 
 <!-- Address Fields -->

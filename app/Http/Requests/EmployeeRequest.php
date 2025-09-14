@@ -26,7 +26,7 @@ class EmployeeRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', $this->uniqueEmailRule()],
             'password' => [$this->sendPassword(), 'string', 'confirmed', Password::defaults()],
-            'document' => ['required', 'string', 'max:14', 'unique:users,document'],
+            'document' => ['required', 'string', 'max:14', $this->uniqueDocumentRule()],
             'birth_date' => ['required', 'date', 'before:today'],
             'address' => ['required', 'array'],
             'address.zip_code' => ['required', 'string', 'max:20'],
@@ -62,5 +62,10 @@ class EmployeeRequest extends FormRequest
     protected function uniqueEmailRule(): string
     {
         return 'unique:users,email';
+    }
+
+    protected function uniqueDocumentRule(): string
+    {
+        return 'unique:users,document';
     }
 }

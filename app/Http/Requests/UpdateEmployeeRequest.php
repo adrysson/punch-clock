@@ -15,4 +15,11 @@ class UpdateEmployeeRequest extends EmployeeRequest
 
         return "unique:users,email,{$employeeId}";
     }
+
+    protected function uniqueDocumentRule(): string
+    {
+        $employeeId = $this->route('employee')->id;
+
+        return "unique:users,document,{$employeeId}";
+    }
 }
