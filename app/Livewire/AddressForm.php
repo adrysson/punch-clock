@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Domain\Client\ZipCodeClient;
 use Livewire\Component;
 
 class AddressForm extends Component
@@ -23,30 +24,18 @@ class AddressForm extends Component
 
     public function searchAddress(string $zipCode): void
     {
-        $zipCode = preg_replace('/\D/', '', $zipCode ?? '');
+        $client = app(ZipCodeClient::class);
 
-        if (strlen($zipCode) !== 8) {
-            $this->addError('address.zip_code', __('CEP inválido.'));
+        $data = $client->findAddress($zipCode);
+
+        if ($data === null) {
+            session()->flash('error', 'CEP não encontrado.');
             return;
         }
 
-        $response = file_get_contents(env('VIA_CEP_URL') . "{$zipCode}/json/");
-
-        if ($response === false) {
-            $this->addError('address.zip_code', __('Não foi possível buscar o endereço. Tente novamente.'));
-            return;
-        }
-
-        $data = json_decode($response, true);
-
-        if (isset($data['erro']) && $data['erro'] === true) {
-            $this->addError('address.zip_code', __('CEP não encontrado.'));
-            return;
-        }
-
-        $this->address['state'] = $data['uf'] ?? '';
-        $this->address['city'] = $data['localidade'] ?? '';
-        $this->address['neighborhood'] = $data['bairro'] ?? '';
-        $this->address['street'] = $data['logradouro'] ?? '';
+        $this->address['state'] = $data['state'] ?? '';
+        $this->address['city'] = $data['city'] ?? '';
+        $this->address['neighborhood'] = $data['neighborhood'] ?? '';
+        $this->address['street'] = $data['street'] ?? '';
     }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Domain\Client\ZipCodeClient;
 use App\Domain\Enum\Role;
 use App\Domain\Repository\EmployeeRepository;
 use App\Domain\Repository\RoleRepository;
 use App\Domain\Repository\TimeClockRepository;
+use App\Infrastructure\Client\ViaCepZipCodeClient;
 use App\Infrastructure\Repository\Db\DbTimeClockRepository;
 use App\Infrastructure\Repository\Eloquent\EloquentEmployeeRepository;
 use App\Infrastructure\Repository\Eloquent\EloquentRoleRepository;
@@ -30,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             TimeClockRepository::class,
             DbTimeClockRepository::class,
+        );
+        $this->app->bind(
+            ZipCodeClient::class,
+            ViaCepZipCodeClient::class,
         );
     }
 
