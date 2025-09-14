@@ -8,7 +8,7 @@ use App\Models\TimeClock as TimeClockModel;
 
 class TimeClock extends Component
 {
-    public $timeClocks = [];
+    public array $timeClocks = [];
 
     public function mount()
     {
@@ -17,14 +17,13 @@ class TimeClock extends Component
 
     public function loadTimeClocks()
     {
-        $this->timeClocks = Auth::user()->timeClocks()->latest()->limit(5)->get();
+        $this->timeClocks = Auth::user()->timeClocks()->paginate()->items();
     }
 
     public function punch()
     {
-        $user = Auth::user();
-        TimeClockModel::create(['user_id' => $user->id]);
-            $this->loadTimeClocks();
+        Auth::user()->timeClocks()->create();
+        $this->loadTimeClocks();
     }
 
     public function render()

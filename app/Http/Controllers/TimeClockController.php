@@ -12,7 +12,7 @@ class TimeClockController extends Controller
      */
     public function index(Request $request)
     {
-        $builder = TimeClock::latest();
+        $builder = TimeClock::query();
 
         if ($request->filled('start_date')) {
             $builder->whereDate('created_at', '>=', $request->input('start_date'));
