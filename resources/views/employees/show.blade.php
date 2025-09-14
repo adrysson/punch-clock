@@ -6,6 +6,14 @@
             {{ $employee->email }}
         </p>
         <p class="text-gray-600 mb-2">
+            <strong>{{ __('Função:') }}</strong>
+            {{ $employee->role->name }}
+        </p>
+        <p class="text-gray-600 mb-2">
+            <strong>{{ __('Data de nascimento:') }}</strong>
+            {{ $employee->birth_date->format('d/m/Y') }}
+        </p>
+        <p class="text-gray-600 mb-2">
             <strong>{{ __('Criado em:') }}</strong>
             {{ $employee->created_at->format('d/m/Y H:i') }}
         </p>

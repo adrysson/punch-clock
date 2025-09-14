@@ -48,6 +48,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
         ];
     }
 
@@ -81,5 +82,10 @@ class User extends Authenticatable
     public function address()
     {
         return $this->hasOne(Address::class, 'id', 'address_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }
