@@ -2,8 +2,6 @@
 
 namespace App\Domain\Repository;
 
-use Illuminate\Support\Collection;
-
 interface TimeClockRepository
 {
     public function all(?string $startDate = null, ?string $endDate = null): array;
