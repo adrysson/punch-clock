@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function address()
     {
-        return $this->hasOne(Address::class, 'id', 'address_id');
+        return $this->belongsTo(Address::class);
     }
 
     public function role()

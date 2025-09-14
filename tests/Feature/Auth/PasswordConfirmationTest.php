@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Volt\Volt;
@@ -13,7 +14,7 @@ class PasswordConfirmationTest extends TestCase
 
     public function test_confirm_password_screen_can_be_rendered(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->for(Address::factory())->create();
 
         $response = $this->actingAs($user)->get(route('password.confirm'));
 
@@ -22,7 +23,7 @@ class PasswordConfirmationTest extends TestCase
 
     public function test_password_can_be_confirmed(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->for(Address::factory())->create();
 
         $this->actingAs($user);
 
@@ -37,7 +38,7 @@ class PasswordConfirmationTest extends TestCase
 
     public function test_password_is_not_confirmed_with_invalid_password(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->for(Address::factory())->create();
 
         $this->actingAs($user);
 
