@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Infrastructure\Repository\Db;
 
 use App\Infrastructure\Repository\Db\DbTimeClockRepository;
 use Illuminate\Support\Facades\DB;

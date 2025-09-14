@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Infrastructure\Client;
 
 use App\Infrastructure\Client\ViaCepZipCodeClient;
 use PHPUnit\Framework\TestCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Infrastructure\Repository\Eloquent;
 
 use App\Infrastructure\Repository\Eloquent\EloquentRoleRepository;
 use App\Models\Role;

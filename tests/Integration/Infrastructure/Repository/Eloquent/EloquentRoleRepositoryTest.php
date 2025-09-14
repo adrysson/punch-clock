@@ -1,11 +1,9 @@
 <?php
 
-namespace Tests\Integration;
+namespace Tests\Integration\Infrastructure\Repository\Eloquent;
 
 use App\Infrastructure\Repository\Eloquent\EloquentRoleRepository;
-use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Mockery;
 use Tests\TestCase;
 
 class EloquentRoleRepositoryTest extends TestCase
