@@ -66,11 +66,11 @@ class User extends Authenticatable
 
     public function employees()
     {
-        return $this->hasMany(self::class, 'admin_id');
+        return $this->hasMany(self::class, 'manager_id');
     }
 
     public function manager()
     {
-        return $this->belongsTo(self::class, 'admin_id');
+        return $this->belongsTo(self::class, 'manager_id');
     }
 }
