@@ -73,6 +73,8 @@ class EmployeeController extends Controller
 
         $employee->update($validated);
 
+        $employee->address->update($validated['address']);
+
         return redirect()->route('employees.index')->with('status', __('Funcionário atualizado com sucesso!'));
     }
 

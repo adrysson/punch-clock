@@ -57,69 +57,7 @@
 />
 
 <!-- Address Fields -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <flux:input
-        wire:model="address[zip_code]"
-        :label="__('CEP')"
-        type="text"
-        required
-        autocomplete="address[zip_code]"
-        :placeholder="__('00000-000')"
-        mask="00000-000"
-        maxlength="9"
-        :value="$employee?->address->zip_code ?? ''"
-    />
-    <flux:input
-        wire:model="address[state]"
-        :label="__('Estado')"
-        type="text"
-        required
-        autocomplete="address[state]"
-        :placeholder="__('Estado')"
-        :value="$employee?->address->state ?? ''"
-    />
-    <flux:input
-        wire:model="address[city]"
-        :label="__('Cidade')"
-        type="text"
-        required
-        autocomplete="address[city]"
-        :placeholder="__('Cidade')"
-        :value="$employee?->address->city ?? ''"
-    />
-    <flux:input
-        wire:model="address[neighborhood]"
-        :label="__('Bairro')"
-        type="text"
-        autocomplete="address[neighborhood]"
-        :placeholder="__('Bairro')"
-        :value="$employee?->address->neighborhood ?? ''"
-    />
-    <flux:input
-        wire:model="address[street]"
-        :label="__('Rua')"
-        type="text"
-        autocomplete="address[street]"
-        :placeholder="__('Rua')"
-        :value="$employee?->address->street ?? ''"
-    />
-    <flux:input
-        wire:model="address[number]"
-        :label="__('Número')"
-        type="number"
-        autocomplete="address[number]"
-        :placeholder="__('Número')"
-        :value="$employee?->address->number ?? ''"
-    />
-    <flux:input
-        wire:model="address[complement]"
-        :label="__('Complemento')"
-        type="text"
-        autocomplete="address[complement]"
-        :placeholder="__('Complemento')"
-        :value="$employee?->address->complement ?? ''"
-    />
-</div>
+<livewire:address-form :address="$employee?->address" />
 
 <!-- Password -->
 <flux:input
