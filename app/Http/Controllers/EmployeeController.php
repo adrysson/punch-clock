@@ -6,7 +6,6 @@ use App\Domain\Repository\EmployeeRepository;
 use App\Domain\Repository\RoleRepository;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use App\Models\Role;
 use App\Models\User;
 
 class EmployeeController extends Controller
@@ -62,7 +61,7 @@ class EmployeeController extends Controller
      */
     public function edit(User $employee)
     {
-        $roles = Role::all();
+        $roles = $this->roleRepository->all();
 
         return view('employees.edit', compact('employee', 'roles'));
     }
