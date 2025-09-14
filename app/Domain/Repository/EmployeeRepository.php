@@ -2,13 +2,13 @@
 
 namespace App\Domain\Repository;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
 interface EmployeeRepository
 {
-    public function paginate();
+    public function paginate(): LengthAwarePaginator;
 
-    // public function find($id);
-
-    // public function create(array $data);
+    public function create(array $data): void;
 
     // public function update($id, array $data);
 

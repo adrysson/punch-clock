@@ -42,14 +42,9 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        $validated = $request->dataToSave();
-
-        $address = \App\Models\Address::create($validated['address']);
-        $validated['address_id'] = $address->id;
-
-        $user = auth()->user()->employees()->create($validated);
-
-        event(new \Illuminate\Auth\Events\Registered($user));
+        $this->employeeRepository->create(
+            data: $request->dataToSave(),
+        );
 
         return redirect()->route('employees.index')->with('status', __('Funcionário cadastrado com sucesso!'));
     }
