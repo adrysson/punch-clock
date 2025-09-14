@@ -69,7 +69,7 @@ class User extends Authenticatable
         return $this->hasMany(self::class, 'admin_id');
     }
 
-    public function admin()
+    public function manager()
     {
         return $this->belongsTo(self::class, 'admin_id');
     }

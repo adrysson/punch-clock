@@ -39,7 +39,7 @@
                         {{ __('Usuário') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{ __('Admin') }}
+                        {{ __('Gestor') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
                         {{ __('Data') }}
@@ -58,7 +58,7 @@
                             </a>
                         </td>
                         <td class="px-6 py-4">
-                            {{ $timeClock->user->admin?->name ?? '-' }}
+                            {{ $timeClock->user->manager?->name ?? '-' }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $timeClock->created_at->format('d/m/Y') }}
