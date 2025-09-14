@@ -12,7 +12,7 @@ class TimeClockController extends Controller
      */
     public function index()
     {
-        $timeClocks = TimeClock::paginate();
+        $timeClocks = TimeClock::latest()->paginate();
 
         return view('time-clocks.index', compact('timeClocks'));
     }
