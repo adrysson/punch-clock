@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'document',
+        'birth_date',
+        'address_id',
     ];
 
     /**
@@ -44,6 +48,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
         ];
     }
 
@@ -62,5 +67,25 @@ class User extends Authenticatable
     public function timeClocks()
     {
         return $this->hasMany(TimeClock::class);
+    }
+
+    public function employees()
+    {
+        return $this->hasMany(self::class, 'manager_id');
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(self::class, 'manager_id');
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }

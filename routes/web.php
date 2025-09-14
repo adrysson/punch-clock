@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TimeClockController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -17,6 +20,22 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
     Volt::route('settings/password', 'settings.password')->name('password.edit');
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
+});
+
+Route::middleware([AdminMiddleware::class])->group(function () {
+    Route::group(['prefix' => 'employees', 'as' => 'employees.'], function () {
+        Route::get('/', [EmployeeController::class, 'index'])->name('index');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('create');
+        // rota show do controller, com o parâmetro {employee}
+        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('show');
+        Route::post('/', [EmployeeController::class, 'store'])->name('store');
+        Route::get('/{employee}/edit', [EmployeeController::class, 'edit'])->name('edit');
+        Route::put('/{employee}', [EmployeeController::class, 'update'])->name('update');
+        Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('destroy');
+    });
+    Route::group(['prefix' => 'time-clocks', 'as' => 'time-clocks.'], function () {
+        Route::get('/', TimeClockController::class . '@index')->name('index');
+    });
 });
 
 require __DIR__.'/auth.php';

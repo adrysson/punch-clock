@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -24,7 +25,7 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
-        $user = User::factory()->create();
+        $user = User::factory()->for(Address::factory())->create();
 
         Volt::test('auth.forgot-password')
             ->set('email', $user->email)
@@ -37,7 +38,7 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
-        $user = User::factory()->create();
+        $user = User::factory()->for(Address::factory())->create();
 
         Volt::test('auth.forgot-password')
             ->set('email', $user->email)
@@ -56,7 +57,7 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
-        $user = User::factory()->create();
+        $user = User::factory()->for(Address::factory())->create();
 
         Volt::test('auth.forgot-password')
             ->set('email', $user->email)
