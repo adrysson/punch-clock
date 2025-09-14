@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Repository\EmployeeRepository;
+use App\Domain\Repository\RoleRepository;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use App\Models\Role;
 use App\Models\User;
 
 class EmployeeController extends Controller
 {
+    public function __construct(
+        private EmployeeRepository $employeeRepository,
+        private RoleRepository $roleRepository,
+    ) {  
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $employees = auth()->user()->employees()->paginate();
+        $employees = $this->employeeRepository->paginate();
 
         return view('employees.index', compact('employees'));
     }
@@ -24,7 +31,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = $this->roleRepository->all();
 
         return view('employees.create', compact('roles'));
     }
@@ -34,14 +41,9 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        $validated = $request->dataToSave();
-
-        $address = \App\Models\Address::create($validated['address']);
-        $validated['address_id'] = $address->id;
-
-        $user = auth()->user()->employees()->create($validated);
-
-        event(new \Illuminate\Auth\Events\Registered($user));
+        $this->employeeRepository->create(
+            data: $request->dataToSave(),
+        );
 
         return redirect()->route('employees.index')->with('status', __('Funcionário cadastrado com sucesso!'));
     }
@@ -59,7 +61,7 @@ class EmployeeController extends Controller
      */
     public function edit(User $employee)
     {
-        $roles = Role::all();
+        $roles = $this->roleRepository->all();
 
         return view('employees.edit', compact('employee', 'roles'));
     }
@@ -69,11 +71,10 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, User $employee)
     {
-        $validated = $request->dataToSave();
-
-        $employee->update($validated);
-
-        $employee->address->update($validated['address']);
+        $this->employeeRepository->update(
+            employee: $employee,
+            data: $$request->dataToSave(),
+        );
 
         return redirect()->route('employees.index')->with('status', __('Funcionário atualizado com sucesso!'));
     }
@@ -83,7 +84,7 @@ class EmployeeController extends Controller
      */
     public function destroy(User $employee)
     {
-        $employee->delete();
+        $this->employeeRepository->delete($employee);
 
         return redirect()->route('employees.index')->with('status', __('Funcionário deletado com sucesso!'));
     }

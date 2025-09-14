@@ -18,7 +18,7 @@
         required
         autocomplete="address[state]"
         :placeholder="__('Estado')"
-        :value="$address?->state ?? ''"
+        :value="$address['state']?? ''"
     />
     <flux:input
         wire:model="address[city]"
@@ -27,7 +27,7 @@
         required
         autocomplete="address[city]"
         :placeholder="__('Cidade')"
-        :value="$address?->city ?? ''"
+        :value="$address['city'] ?? ''"
     />
     <flux:input
         wire:model="address[neighborhood]"
@@ -35,7 +35,7 @@
         type="text"
         autocomplete="address[neighborhood]"
         :placeholder="__('Bairro')"
-        :value="$address?->neighborhood ?? ''"
+        :value="$address['neighborhood'] ?? ''"
     />
     <flux:input
         wire:model="address[street]"
@@ -43,7 +43,7 @@
         type="text"
         autocomplete="address[street]"
         :placeholder="__('Rua')"
-        :value="$address?->street ?? ''"
+        :value="$address['street'] ?? ''"
     />
     <flux:input
         wire:model="address[number]"
@@ -51,7 +51,7 @@
         type="number"
         autocomplete="address[number]"
         :placeholder="__('Número')"
-        :value="$address?->number ?? ''"
+        :value="$address['number'] ?? ''"
     />
     <flux:input
         wire:model="address[complement]"
@@ -59,6 +59,6 @@
         type="text"
         autocomplete="address[complement]"
         :placeholder="__('Complemento')"
-        :value="$address?->complement ?? ''"
+        :value="$address['complement'] ?? ''"
     />
 </div>
