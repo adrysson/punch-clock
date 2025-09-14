@@ -60,7 +60,9 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $employee = User::findOrFail($id);
+
+        return view('employees.edit', compact('employee'));
     }
 
     /**
@@ -68,7 +70,23 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $employee = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,'.$employee->id],
+            'password' => ['nullable', 'string', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+        ]);
+
+        if (!empty($validated['password'])) {
+            $validated['password'] = \Illuminate\Support\Facades\Hash::make($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+
+        $employee->update($validated);
+
+        return redirect()->route('employees.index')->with('status', __('Funcionário atualizado com sucesso!'));
     }
 
     /**

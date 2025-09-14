@@ -10,6 +10,9 @@
                     <th scope="col" class="px-6 py-3">
                         {{ __('E-mail') }}
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        {{ __('Ações') }}
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +23,11 @@
                         </td>
                         <td class="px-6 py-4">
                             {{ $employee->email }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="{{ route('employees.edit', $employee->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                {{ __('Editar') }}
+                            </a>
                         </td>
                     </tr>
                 @endforeach
