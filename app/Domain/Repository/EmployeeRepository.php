@@ -2,6 +2,7 @@
 
 namespace App\Domain\Repository;
 
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface EmployeeRepository
@@ -10,7 +11,7 @@ interface EmployeeRepository
 
     public function create(array $data): void;
 
-    // public function update($id, array $data);
+    public function update(User $employee, array $data): void;
 
-    // public function delete($id);
+    public function delete(User $employee): void;
 }

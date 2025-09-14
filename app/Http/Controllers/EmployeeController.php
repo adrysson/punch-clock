@@ -72,11 +72,10 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, User $employee)
     {
-        $validated = $request->dataToSave();
-
-        $employee->update($validated);
-
-        $employee->address->update($validated['address']);
+        $this->employeeRepository->update(
+            employee: $employee,
+            data: $$request->dataToSave(),
+        );
 
         return redirect()->route('employees.index')->with('status', __('Funcionário atualizado com sucesso!'));
     }
@@ -86,7 +85,7 @@ class EmployeeController extends Controller
      */
     public function destroy(User $employee)
     {
-        $employee->delete();
+        $this->employeeRepository->delete($employee);
 
         return redirect()->route('employees.index')->with('status', __('Funcionário deletado com sucesso!'));
     }

@@ -4,6 +4,7 @@ namespace App\Infrastructure\Persistence\Repository;
 
 use App\Domain\Repository\EmployeeRepository;
 use App\Models\Address;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class EloquentEmployeeRepository implements EmployeeRepository
@@ -19,5 +20,18 @@ class EloquentEmployeeRepository implements EmployeeRepository
         $data['address_id'] = $address->id;
 
         auth()->user()->employees()->create($data);
+    }
+
+    public function update(User $employee, array $data): void
+    {
+        $employee->update($data);
+        if (isset($data['address'])) {
+            $employee->address->update($data['address']);
+        }
+    }
+
+    public function delete(User $employee): void
+    {
+        $employee->delete();
     }
 }
