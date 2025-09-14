@@ -7,8 +7,13 @@ use App\Models\Role;
 
 class EloquentRoleRepository implements RoleRepository
 {
+    public function __construct(
+        private Role $model,
+    ) { 
+    }
+
     public function all(): array
     {
-        return Role::all()->toArray();
+        return $this->model::all()->toArray();
     }
 }
