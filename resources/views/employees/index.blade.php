@@ -24,14 +24,17 @@
                         <td class="px-6 py-4">
                             {{ $employee->email }}
                         </td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('employees.edit', $employee->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <td class="px-6 py-4 flex">
+                            <a href="{{ route('employees.show', $employee->id) }}" class="font-medium text-black dark:text-green-500 hover:underline mx-1">
+                                {{ __('Ver') }}
+                            </a>
+                            <a href="{{ route('employees.edit', $employee->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
                                 {{ __('Editar') }}
                             </a>
                             <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline" onclick="return confirm('Tem certeza que deseja excluir este funcionário?')">
+                                <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline mx-1" onclick="return confirm('Tem certeza que deseja excluir este funcionário?')">
                                     {{ __('Excluir') }}
                                 </button>
                             </form>

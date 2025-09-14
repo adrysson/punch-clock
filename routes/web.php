@@ -25,6 +25,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::group(['prefix' => 'employees', 'as' => 'employees.'], function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('create');
+        Route::get('/{employee_id}', [EmployeeController::class, 'show'])->name('show');
         Route::post('/', [EmployeeController::class, 'store'])->name('store');
         Route::get('/{employee_id}/edit', [EmployeeController::class, 'edit'])->name('edit');
         Route::put('/{employee_id}', [EmployeeController::class, 'update'])->name('update');

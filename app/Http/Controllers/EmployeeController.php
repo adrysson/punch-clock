@@ -52,7 +52,9 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $employee = User::findOrFail($id);
+
+        return view('employees.show', compact('employee'));
     }
 
     /**
