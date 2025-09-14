@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Repository\EmployeeRepository;
+use App\Domain\Repository\RoleRepository;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Role;
@@ -9,12 +11,18 @@ use App\Models\User;
 
 class EmployeeController extends Controller
 {
+    public function __construct(
+        private EmployeeRepository $employeeRepository,
+        private RoleRepository $roleRepository,
+    ) {  
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $employees = auth()->user()->employees()->paginate();
+        $employees = $this->employeeRepository->paginate();
 
         return view('employees.index', compact('employees'));
     }
@@ -24,7 +32,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = $this->roleRepository->all();
 
         return view('employees.create', compact('roles'));
     }

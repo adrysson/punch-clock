@@ -28,7 +28,7 @@
     required
 >
     @foreach($roles as $role)
-        <flux:select.option :selected="$employee?->role_id == $role->id" value="{{ $role->id }}">{{ $role->name }}</flux:select.option>
+        <flux:select.option :selected="$employee?->role_id == $role['id']" value="{{ $role['id'] }}">{{ $role['name'] }}</flux:select.option>
     @endforeach
 </flux:select>
 
