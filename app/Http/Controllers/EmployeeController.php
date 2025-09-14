@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Enum\Role;
+use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\Role as ModelsRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,22 +26,20 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $roles = ModelsRole::all();
+
+        return view('employees.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
-        ]);
+        $validated = $request->dataToSave();
 
-        $validated['password'] = \Illuminate\Support\Facades\Hash::make($validated['password']);
-        $validated['role_id'] = \App\Domain\Enum\Role::EMPLOYEE->value;
+        $address = \App\Models\Address::create($validated['address']);
+        $validated['address_id'] = $address->id;
 
         $user = auth()->user()->employees()->create($validated);
 
@@ -60,25 +61,17 @@ class EmployeeController extends Controller
      */
     public function edit(User $employee)
     {
-        return view('employees.edit', compact('employee'));
+        $roles = ModelsRole::all();
+
+        return view('employees.edit', compact('employee', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $employee)
+    public function update(UpdateEmployeeRequest $request, User $employee)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,'.$employee->id],
-            'password' => ['nullable', 'string', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
-        ]);
-
-        if (!empty($validated['password'])) {
-            $validated['password'] = \Illuminate\Support\Facades\Hash::make($validated['password']);
-        } else {
-            unset($validated['password']);
-        }
+        $validated = $request->dataToSave();
 
         $employee->update($validated);
 

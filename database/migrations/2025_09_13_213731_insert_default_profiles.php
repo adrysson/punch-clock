@@ -14,14 +14,14 @@ return new class extends Migration
         DB::table('profiles')->insert([
             [
                 'id' => Role::MANAGER->value,
-                'name' => 'manager',
+                'name' => 'Gestor',
                 'description' => 'Perfil de gestor com acesso total',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'id' => Role::EMPLOYEE->value,
-                'name' => 'employee',
+                'name' => 'Funcionário',
                 'description' => 'Perfil de funcionário com acesso limitado',
                 'created_at' => now(),
                 'updated_at' => now(),

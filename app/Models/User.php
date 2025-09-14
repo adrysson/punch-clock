@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'document',
+        'birth_date',
+        'address_id',
     ];
 
     /**
@@ -72,5 +76,10 @@ class User extends Authenticatable
     public function manager()
     {
         return $this->belongsTo(self::class, 'manager_id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class, 'id', 'address_id');
     }
 }
