@@ -28,6 +28,13 @@
                             <a href="{{ route('employees.edit', $employee->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                 {{ __('Editar') }}
                             </a>
+                            <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline" onclick="return confirm('Tem certeza que deseja excluir este funcionário?')">
+                                    {{ __('Excluir') }}
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

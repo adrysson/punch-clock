@@ -94,6 +94,10 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $employee = User::findOrFail($id);
+
+        $employee->delete();
+
+        return redirect()->route('employees.index')->with('status', __('Funcionário deletado com sucesso!'));
     }
 }

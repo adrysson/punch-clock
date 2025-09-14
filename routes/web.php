@@ -28,7 +28,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::post('/', [EmployeeController::class, 'store'])->name('store');
         Route::get('/{employee_id}/edit', [EmployeeController::class, 'edit'])->name('edit');
         Route::put('/{employee_id}', [EmployeeController::class, 'update'])->name('update');
-        // Route::delete('/{employee}', [\App\Http\Controllers\EmployeeController::class, 'destroy'])->name('destroy');
+        Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('destroy');
     });
 });
 
