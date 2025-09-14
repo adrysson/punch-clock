@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Enum\Role;
 use App\Http\Requests\EmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use App\Models\Role as ModelsRole;
+use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -16,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::where('role_id', Role::EMPLOYEE->value)->paginate();
+        $employees = auth()->user()->employees()->paginate();
 
         return view('employees.index', compact('employees'));
     }
@@ -26,7 +24,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $roles = ModelsRole::all();
+        $roles = Role::all();
 
         return view('employees.create', compact('roles'));
     }
@@ -61,7 +59,7 @@ class EmployeeController extends Controller
      */
     public function edit(User $employee)
     {
-        $roles = ModelsRole::all();
+        $roles = Role::all();
 
         return view('employees.edit', compact('employee', 'roles'));
     }
