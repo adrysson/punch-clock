@@ -14,7 +14,7 @@ class ViaCepZipCodeClient implements ZipCodeClient
             return null;
         }
 
-        $response = file_get_contents(env('VIA_CEP_URL') . "{$zipCode}/json/");
+        $response = $this->request($zipCode);
 
         if ($response === false) {
             return null;
@@ -32,5 +32,10 @@ class ViaCepZipCodeClient implements ZipCodeClient
             'neighborhood' => $data['bairro'] ?? '',
             'street' => $data['logradouro'] ?? '',
         ];
+    }
+
+    protected function request(string $zipCode): string|false
+    {
+        return file_get_contents(env('VIA_CEP_URL') . "{$zipCode}/json/");
     }
 }
