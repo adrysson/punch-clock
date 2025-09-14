@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Persistence\Repository;
+namespace App\Infrastructure\Repository\Eloquent;
 
 use App\Domain\Repository\EmployeeRepository;
 use App\Models\Address;

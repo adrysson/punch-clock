@@ -5,8 +5,8 @@ namespace App\Providers;
 use App\Domain\Enum\Role;
 use App\Domain\Repository\EmployeeRepository;
 use App\Domain\Repository\RoleRepository;
-use App\Infrastructure\Persistence\Repository\EloquentEmployeeRepository;
-use App\Infrastructure\Persistence\Repository\EloquentRoleRepository;
+use App\Infrastructure\Repository\Eloquent\EloquentEmployeeRepository;
+use App\Infrastructure\Repository\Eloquent\EloquentRoleRepository;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
