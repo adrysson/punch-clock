@@ -1,8 +1,8 @@
 <x-employees.layout :heading="__('Lista')" :subheading="__('Lista de funcionários cadastrados')">
 
     <div class="flex flex-col items-center">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table class="w-full text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         {{ __('Nome') }}
@@ -25,18 +25,18 @@
                             {{ $employee->email }}
                         </td>
                         <td class="px-6 py-4 flex">
-                            <a href="{{ route('employees.show', $employee->id) }}" class="font-medium text-black dark:text-green-500 hover:underline mx-1">
+                            <flux:button icon="eye" class="w-full" href="{{ route('employees.show', $employee->id) }}">
                                 {{ __('Ver') }}
-                            </a>
-                            <a href="{{ route('employees.edit', $employee->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1">
+                            </flux:button>
+                            <flux:button variant="primary" color="indigo" icon="pencil" class="w-full" href="{{ route('employees.edit', $employee->id) }}">
                                 {{ __('Editar') }}
-                            </a>
+                            </flux:button>
                             <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline mx-1" onclick="return confirm('Tem certeza que deseja excluir este funcionário?')">
+                                <flux:button type="submit" variant="primary" color="red" icon="trash" class="w-full" onclick="return confirm('Tem certeza que deseja excluir este funcionário?')">
                                     {{ __('Excluir') }}
-                                </button>
+                                </flux:button>
                             </form>
                         </td>
                     </tr>

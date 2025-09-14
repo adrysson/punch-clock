@@ -26,7 +26,7 @@
             </flux:button>
         </div>
         <div class="px-4">
-            <flux:button type="submit" class="w-full mt-6" href="{{ route('time-clocks.index') }}">
+            <flux:button class="w-full mt-6" href="{{ route('time-clocks.index') }}">
                 {{ __('Limpar') }}
             </flux:button>
         </div>
