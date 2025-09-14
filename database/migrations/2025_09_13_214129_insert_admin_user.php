@@ -1,6 +1,6 @@
 <?php
 
-use App\Domain\Enum\Profile;
+use App\Domain\Enum\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +15,7 @@ return new class extends Migration
             'name' => 'Admin',
             'email' => 'admin@punchclock.com',
             'password' => bcrypt('admin123'),
-            'profile_id' => Profile::ADMIN->value,
+            'profile_id' => Role::MANAGER->value,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

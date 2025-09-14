@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Domain\Enum\Profile;
+use App\Domain\Enum\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()?->profile_id !== Profile::ADMIN->value) {
+        if ($request->user()?->role_id !== Role::MANAGER->value) {
             return redirect('/dashboard');
         }
 

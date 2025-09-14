@@ -1,6 +1,6 @@
 <?php
 
-use App\Domain\Enum\Profile;
+use App\Domain\Enum\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
@@ -13,14 +13,14 @@ return new class extends Migration
     {
         DB::table('profiles')->insert([
             [
-                'id' => Profile::ADMIN->value,
-                'name' => 'admin',
-                'description' => 'Perfil de administrador com acesso total',
+                'id' => Role::MANAGER->value,
+                'name' => 'manager',
+                'description' => 'Perfil de gestor com acesso total',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id' => Profile::EMPLOYEE->value,
+                'id' => Role::EMPLOYEE->value,
                 'name' => 'employee',
                 'description' => 'Perfil de funcionário com acesso limitado',
                 'created_at' => now(),

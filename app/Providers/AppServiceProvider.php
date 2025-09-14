@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Domain\Enum\Profile;
+use App\Domain\Enum\Role;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::if('admin', function () {
-            return auth()->user()?->profile_id === Profile::ADMIN->value;
+            return auth()->user()?->role_id === Role::MANAGER->value;
         });
     }
 }

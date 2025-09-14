@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Enum\Profile;
+use App\Domain\Enum\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +13,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::where('profile_id', Profile::EMPLOYEE->value)->paginate();
+        $employees = User::where('profile_id', Role::EMPLOYEE->value)->paginate();
 
         return view('employees.index', compact('employees'));
     }
@@ -38,7 +38,7 @@ class EmployeeController extends Controller
         ]);
 
         $validated['password'] = \Illuminate\Support\Facades\Hash::make($validated['password']);
-        $validated['profile_id'] = \App\Domain\Enum\Profile::EMPLOYEE->value;
+        $validated['profile_id'] = \App\Domain\Enum\Role::EMPLOYEE->value;
 
         $user = auth()->user()->employees()->create($validated);
 

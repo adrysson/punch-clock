@@ -2,8 +2,8 @@
 
 namespace App\Domain\Enum;
 
-enum Profile: int
+enum Role: int
 {
-    case ADMIN = 1;
+    case MANAGER = 1;
     case EMPLOYEE = 2;
 }
